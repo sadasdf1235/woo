@@ -1,0 +1,29 @@
+
+      GetPage(
+        name: RouteNames.myLanguage,
+        page: () => const LanguagePage(),
+      ),
+      GetPage(
+        name: RouteNames.myMyAddress,
+        page: () => const MyAddressPage(),
+      ),
+      GetPage(
+        name: RouteNames.myMyIndex,
+        page: () => const MyIndexPage(),
+      ),
+      GetPage(
+        name: RouteNames.myOrderDetails,
+        page: () => const OrderDetailsPage(),
+      ),
+      GetPage(
+        name: RouteNames.myOrderList,
+        page: () => const OrderListPage(),
+      ),
+      GetPage(
+        name: RouteNames.myProfileEdit,
+        page: () => const ProfileEditPage(),
+      ),
+      GetPage(
+        name: RouteNames.myTheme,
+        page: () => const ThemePage(),
+      ),

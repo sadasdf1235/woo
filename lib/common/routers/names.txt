@@ -1,0 +1,7 @@
+static const myLanguage = '/my_language';
+static const myMyAddress = '/my_my_address';
+static const myMyIndex = '/my_my_index';
+static const myOrderDetails = '/my_order_details';
+static const myOrderList = '/my_order_list';
+static const myProfileEdit = '/my_profile_edit';
+static const myTheme = '/my_theme';
