@@ -18,7 +18,7 @@ class RouteNames {
   static const stylesImage = '/styles_image';
   static const stylesInputs = '/styles_inputs';
   static const stylesOther = '/styles_other';
-  static const stylesStylesIndex = '/styles_styles_index';
+  static const stylesIndex = '/styles_index';
   static const stylesText = '/styles_text';
   static const stylesTextForm = '/styles_text_form';
 
