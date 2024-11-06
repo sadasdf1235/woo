@@ -8,6 +8,8 @@ class Global {
     /// 先就行原生端（ios android）插件注册，然后再处理后续操作，这样能保证代码运行正确。
     WidgetsFlutterBinding.ensureInitialized();
 
+    await Storage().init();
+
     await Future.wait([
       Get.putAsync<ConfigService>(() async => await ConfigService().init()),
     ]).whenComplete(() {});
