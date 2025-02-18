@@ -8,3 +8,6 @@ export 'radius.dart';
 export 'space.dart';
 export 'scale.dart';
 export 'size.dart';
+export 'padding.dart';
+export 'border.dart';
+export 'elevation.dart';
