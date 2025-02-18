@@ -6,3 +6,4 @@ export 'colors.dart';
 export 'text.dart';
 export 'radius.dart';
 export 'space.dart';
+export 'scale.dart';
