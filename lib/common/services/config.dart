@@ -1,6 +1,6 @@
-import 'dart:ui';
+import 'package:adaptive_theme/adaptive_theme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
@@ -10,29 +10,28 @@ import '../index.dart';
 class ConfigService extends GetxService {
   // 这是一个单例写法
   static ConfigService get to => Get.find();
-  // 语言
-  Locale locale = PlatformDispatcher.instance.locale;
-  // 主题
-  final RxBool _isDarkModel = Get.isDarkMode.obs;
-  bool get isDarkModel => _isDarkModel.value;
-
-  @override
-  void onReady() {
-    super.onReady();
-    getPlatform();
-    initLocale();
-    initTheme();
-  }
 
   PackageInfo? _platform;
   String get version => _platform?.version ?? '-';
 
+  // 多语言
+  Locale locale = PlatformDispatcher.instance.locale;
+
+  // 主题
+  AdaptiveThemeMode themeMode = AdaptiveThemeMode.light;
+
+  // 是否首次打开
+  bool get isAlreadyOpen => Storage().getBool(Constants.storageAlreadyOpen);
+
   // 初始化
   Future<ConfigService> init() async {
     await getPlatform();
+    await initTheme();
+    initLocale();
     return this;
   }
 
+  // 获取平台信息
   Future<void> getPlatform() async {
     _platform = await PackageInfo.fromPlatform();
   }
@@ -49,30 +48,48 @@ class ConfigService extends GetxService {
   }
 
   // 更改语言
-  void onLocaleUpdate(Locale value) {
+  void setLanguage(Locale value) {
     locale = value;
     Get.updateLocale(value);
     Storage().setString(Constants.storageLanguageCode, value.languageCode);
   }
 
   // 初始 theme
-  void initTheme() {
-    var themeCode = Storage().getString(Constants.storageThemeCode);
-    _isDarkModel.value = themeCode == "dark" ? true : false;
+  Future<void> initTheme() async {
+    final savedThemeMode = await AdaptiveTheme.getThemeMode();
+    themeMode = savedThemeMode ?? AdaptiveThemeMode.light;
   }
 
   // 切换 theme
-  Future<void> switchThemeModel() async {
-    _isDarkModel.value = !_isDarkModel.value;
-    Get.changeThemeMode(
-      _isDarkModel.value == true ? ThemeMode.dark : ThemeMode.light,
-    );
-    await Storage().setString(Constants.storageThemeCode,
-        _isDarkModel.value == true ? "dark" : "light");
+  Future<void> setThemeMode(String themeKey) async {
+    switch (themeKey) {
+      case "light":
+        AdaptiveTheme.of(Get.context!).setLight();
+        break;
+      case "dark":
+        AdaptiveTheme.of(Get.context!).setDark();
+        break;
+      case "system":
+        AdaptiveTheme.of(Get.context!).setSystem();
+        break;
+    }
 
-    // 重新载入视图，因为
-    // 1 有自定义颜色
-    // 2 有些视图被缓存
-    Get.offAllNamed(RouteNames.systemSplash);
+    // 设置系统样式
+    AppTheme.setSystemStyle();
+  }
+
+  // 切换主题
+  void switchThemeMode() {
+    // 品乓方式切换
+    themeMode = themeMode == AdaptiveThemeMode.light
+        ? AdaptiveThemeMode.dark
+        : AdaptiveThemeMode.light;
+
+    setThemeMode(themeMode.name);
+  }
+
+  // 标记已打开app
+  void setAlreadyOpen() {
+    Storage().setBool(Constants.storageAlreadyOpen, true);
   }
 }

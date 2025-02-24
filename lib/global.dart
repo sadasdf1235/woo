@@ -12,5 +12,8 @@ class Global {
 
     Get.put<ConfigService>(ConfigService());
     Get.put<WPHttpService>(WPHttpService());
+
+    // 初始化配置
+    await ConfigService.to.init();
   }
 }
