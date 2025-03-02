@@ -36,4 +36,6 @@ class Constants {
   // 新旧
   static const storageProductsAttributesCondition =
       'products_attributes_condition';
+
+  static const String storageThemeCode = 'theme_code';
 }

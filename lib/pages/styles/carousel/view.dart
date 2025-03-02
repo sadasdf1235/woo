@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide CarouselController;  // 隐藏 Flutter 的 CarouselController
 import 'package:get/get.dart';
 
 import 'index.dart';

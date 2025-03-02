@@ -23,6 +23,10 @@ class ConfigService extends GetxService {
   // 是否首次打开
   bool get isAlreadyOpen => Storage().getBool(Constants.storageAlreadyOpen);
 
+  // 添加 isDarkModel 属性
+  bool get isDarkModel => _isDarkModel.value;
+  final _isDarkModel = false.obs;
+
   // 初始化
   Future<ConfigService> init() async {
     await getPlatform();
@@ -91,5 +95,26 @@ class ConfigService extends GetxService {
   // 标记已打开app
   void setAlreadyOpen() {
     Storage().setBool(Constants.storageAlreadyOpen, true);
+  }
+
+  // 添加 onLocaleUpdate 方法
+  void onLocaleUpdate(String? locale) {
+    if (locale != null) {
+      var l = locale.split("-");
+      if (l.length >= 2) {
+        Get.updateLocale(Locale(l[0], l[1]));
+      } else {
+        Get.updateLocale(Locale(l[0]));
+      }
+    }
+  }
+
+  // 修改 switchThemeModel 方法
+  Future<void> switchThemeModel() async {
+    _isDarkModel.value = !_isDarkModel.value;
+    Get.changeThemeMode(_isDarkModel.value ? ThemeMode.dark : ThemeMode.light);
+    // 使用正确的存储方法
+    final storage = Storage();
+    await storage.setBool('theme_code', _isDarkModel.value); // 使用直接的键名而不是常量
   }
 }
