@@ -1,18 +1,16 @@
-allprojects {
+buildscript {
     repositories {
         google()
         mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.8.0'
     }
 }
 
 rootProject.buildDir = "../build"
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
-    
-    // 添加 Java 工具链配置
-    plugins.withType(org.jetbrains.kotlin.gradle.plugin.KotlinBasePlugin).configureEach {
-        kotlin.jvmToolchain(17)
-    }
 }
 subprojects {
     project.evaluationDependsOn(":app")
