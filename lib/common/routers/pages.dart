@@ -138,6 +138,10 @@ class RoutePages {
       page: () => const MainPage(),
     ),
     GetPage(
+      name: RouteNames.systemWelcome,
+      page: () => const WelcomePage(),
+    ),
+    GetPage(
       name: RouteNames.systemRegister,
       page: () => const RegisterPage(),
     ),
