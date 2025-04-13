@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:ducafe_ui_core/ducafe_ui_core.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import 'common/index.dart';
 import 'global.dart';
@@ -51,6 +52,9 @@ class MyApp extends StatelessWidget {
           fallbackLocale: Translation.fallbackLocale,
 
           builder: (context, widget) {
+            widget =
+            EasyLoading.init()(context, widget); // EasyLoading 初始化
+
             // 不随系统字体缩放比例
             return MediaQuery(
               data: MediaQuery.of(context)
