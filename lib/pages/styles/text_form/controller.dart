@@ -1,7 +1,18 @@
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 
 class TextFormController extends GetxController {
   TextFormController();
+
+  // 表单key
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  // 用户名
+  TextEditingController usernameController = TextEditingController();
+
+  // 密码
+  TextEditingController passwordController = TextEditingController();
+
 
   _initData() {
     update(["text_form"]);
@@ -20,8 +31,11 @@ class TextFormController extends GetxController {
     _initData();
   }
 
-  // @override
-  // void onClose() {
-  //   super.onClose();
-  // }
+  @override
+  void onClose() {
+    super.onClose();
+    usernameController.dispose();
+    passwordController.dispose();
+  }
+
 }
