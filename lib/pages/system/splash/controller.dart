@@ -31,6 +31,9 @@ class SplashController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+
+    // 设置系统样式
+    AppTheme.setSystemStyle();
   }
 
   @override
