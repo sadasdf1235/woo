@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 
-import 'index.dart';
 import '/common/index.dart';
+import '/pages/index.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -86,11 +86,10 @@ class _MainViewGetX extends GetView<MainController> {
           controller: controller.pageController,
           onPageChanged: controller.onIndexChanged,
           children: const [
-            // 加入空页面占位
-            Text("1"),
-            Text("2"),
-            Text("3"),
-            Text("4"),
+            HomePage(),
+            CartIndexPage(),
+            MsgIndexPage(),
+            MyIndexPage(),
           ],
         ),
       ),
@@ -101,7 +100,7 @@ class _MainViewGetX extends GetView<MainController> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<MainController>(
-      init: MainController(),
+      // init: MainController(),
       id: "main",
       builder: (_) {
         return Scaffold(
