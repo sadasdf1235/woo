@@ -74,5 +74,11 @@ Map<String, String> localeEn = {
   LocaleKeys.tabBarMessage: 'Message',
   LocaleKeys.tabBarProfile: 'Profile',
 
+    // 商品 - 首页
+  LocaleKeys.gHomeSearch: 'Search',
+  LocaleKeys.gHomeFlashSell: 'Flash Sale',
+  LocaleKeys.gHomeNewProduct: 'New Product',
+  LocaleKeys.gHomeMore: 'More',
+
 
 };

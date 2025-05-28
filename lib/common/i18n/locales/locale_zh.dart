@@ -73,4 +73,9 @@ Map<String, String> localeZh = {
   LocaleKeys.tabBarMessage: '消息',
   LocaleKeys.tabBarProfile: '我的',
 
+    // 商品 - 首页
+  LocaleKeys.gHomeSearch: '搜索',
+  LocaleKeys.gHomeFlashSell: '限时抢购',
+  LocaleKeys.gHomeNewProduct: '新品',
+  LocaleKeys.gHomeMore: '更多',
 };
