@@ -24,22 +24,38 @@ class LoginController extends GetxController {
     update(["login"]);
   }
 
-    /// Sign In 登入
+  /// Sign Up 注册
+  void onSignUp() {
+    Get.offNamed(RouteNames.systemRegister);
+  }
+
+
+    /// Sign In
   Future<void> onSignIn() async {
     if ((formKey.currentState as FormState).validate()) {
       try {
         Loading.show();
 
+        // aes 加密密码
+        var password = EncryptUtil().aesEncode(passwordController.text);
+
+        // api 请求
+        UserTokenModel res = await UserApi.login(UserLoginReq(
+          username: userNameController.text,
+          password: password,
+        ));
+
+        // 本地保存 token
+        await UserService.to.setToken(res.token!);
+        // 获取用户资料
+        await UserService.to.getProfile();
+
+        Loading.success();
         Get.back(result: true);
       } finally {
         Loading.dismiss();
       }
     }
-  }
-
-  /// Sign Up 注册
-  void onSignUp() {
-    Get.offNamed(RouteNames.systemRegister);
   }
 
 

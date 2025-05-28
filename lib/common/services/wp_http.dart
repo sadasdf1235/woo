@@ -97,12 +97,16 @@ class WPHttpService extends GetxService {
 
 /// 拦截
 class RequestInterceptors extends Interceptor {
-  @override
+      /// 请求拦截
+    @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     // super.onRequest(options, handler);
-    // if (UserService.to.hasToken) {
-    //   options.headers['Authorization'] = 'Bearer ${UserService.to.token}';
-    // }
+
+    // http header 头加入 Authorization
+    if (UserService.to.hasToken) {
+      options.headers['Authorization'] = 'Bearer ${UserService.to.token}';
+    }
+
     return handler.next(options);
     // 如果你想完成请求并返回一些自定义数据，你可以resolve一个Response对象 `handler.resolve(response)`。
     // 这样请求将会被终止，上层then会被调用，then中返回的数据将是你的自定义response.
@@ -110,6 +114,7 @@ class RequestInterceptors extends Interceptor {
     // 如果你想终止请求并触发一个错误,你可以返回一个`DioError`对象,如`handler.reject(error)`，
     // 这样请求将被中止并触发异常，上层catchError会被调用。
   }
+
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
@@ -130,11 +135,12 @@ class RequestInterceptors extends Interceptor {
 
   // 退出并重新登录
   Future<void> _errorNoAuthLogout() async {
-    // await UserService.to.logout();
+    await UserService.to.logout();
     Get.toNamed(RouteNames.systemLogin);
   }
 
-  @override
+      /// 错误拦截
+    @override
   Future<void> onError(
       DioException err, ErrorInterceptorHandler handler) async {
     final exception = HttpException(err.message ?? "error message");
@@ -175,5 +181,6 @@ class RequestInterceptors extends Interceptor {
     );
     handler.next(errNext);
   }
+
 
 }
