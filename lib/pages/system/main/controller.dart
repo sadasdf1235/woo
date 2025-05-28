@@ -5,7 +5,10 @@ import '/common/index.dart';
 class MainController extends GetxController {
   MainController();
 
-  _initData() {
+  _initData () async {
+    // 读取用户 profile
+    await UserService.to.getProfile();
+
     update(["main"]);
   }
 
