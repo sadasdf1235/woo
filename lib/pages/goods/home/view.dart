@@ -81,12 +81,23 @@ class HomePage extends GetView<HomeController> {
 
 
 
-  // 轮播广告
+    // 轮播广告
   Widget _buildBanner() {
-    return Container()
+    return GetBuilder<HomeController>(
+            id: "home_banner",
+            builder: (_) {
+              return CarouselWidget(
+                items: controller.bannerItems,
+                currentIndex: controller.bannerCurrentIndex,
+                onPageChanged: controller.onChangeBanner,
+                height: 190.w,
+              );
+            })
+        .clipRRect(all: AppRadius.image)
         .sliverToBoxAdapter()
         .sliverPaddingHorizontal(AppSpace.page);
   }
+
 
   // 分类导航
   Widget _buildCategories() {

@@ -6,3 +6,4 @@ export './form/input.dart';
 export './page_title.dart';
 export './pin.dart';
 export './navigation.dart';
+export './carousel.dart';
