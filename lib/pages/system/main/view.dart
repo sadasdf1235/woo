@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
 import 'package:get/get.dart';
 
 import 'index.dart';
+import '/common/index.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -25,12 +28,75 @@ class _MainPageState extends State<MainPage>
 class _MainViewGetX extends GetView<MainController> {
   const _MainViewGetX({Key? key}) : super(key: key);
 
-  // 主视图
-  Widget _buildView() {
-    return const Center(
-      child: Text("MainPage"),
+    // 主视图
+  Widget _buildView(BuildContext context) {
+    return PopScope(
+      // 允许返回
+      canPop: false,
+
+      // 防止连续点击两次退出
+      onPopInvokedWithResult: (bool didPop, dynamic result) {
+        // 如果返回，则不执行退出请求
+        if (didPop) {
+          return;
+        }
+
+        // 退出请求
+        if (controller.closeOnConfirm(context)) {
+          SystemNavigator.pop(); // 系统级别导航栈 退出程序
+        }
+      },
+
+      child: Scaffold(
+        extendBody: true,
+        resizeToAvoidBottomInset: false,
+        // 导航栏
+        bottomNavigationBar: GetBuilder<MainController>(
+          id: 'navigation',
+          builder: (controller) {
+            return BuildNavigation(
+              currentIndex: controller.currentIndex,
+              items: [
+                NavigationItemModel(
+                  label: LocaleKeys.tabBarHome.tr,
+                  icon: AssetsSvgs.navHomeSvg,
+                ),
+                NavigationItemModel(
+                  label: LocaleKeys.tabBarCart.tr,
+                  icon: AssetsSvgs.navCartSvg,
+                  count: 3,
+                ),
+                NavigationItemModel(
+                  label: LocaleKeys.tabBarMessage.tr,
+                  icon: AssetsSvgs.navMessageSvg,
+                  count: 9,
+                ),
+                NavigationItemModel(
+                  label: LocaleKeys.tabBarProfile.tr,
+                  icon: AssetsSvgs.navProfileSvg,
+                ),
+              ],
+              onTap: controller.onJumpToPage, // 切换tab事件
+            );
+          },
+        ),
+        // 内容页
+        body: PageView(
+          physics: const NeverScrollableScrollPhysics(),
+          controller: controller.pageController,
+          onPageChanged: controller.onIndexChanged,
+          children: const [
+            // 加入空页面占位
+            Text("1"),
+            Text("2"),
+            Text("3"),
+            Text("4"),
+          ],
+        ),
+      ),
     );
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +107,7 @@ class _MainViewGetX extends GetView<MainController> {
         return Scaffold(
           appBar: AppBar(title: const Text("main")),
           body: SafeArea(
-            child: _buildView(),
+            child: _buildView(context),
           ),
         );
       },
