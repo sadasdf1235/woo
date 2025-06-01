@@ -29,6 +29,7 @@ class HomeController extends GetxController {
 
   // 页尺寸
   final int _limit = 20;
+  
 
   _initData() async {
     // 首页
@@ -42,6 +43,9 @@ class HomeController extends GetxController {
         await ProductApi.products(ProductsReq(featured: true));
     // 新商品
     newProductProductList = await ProductApi.products(ProductsReq());
+
+    // 模拟网络延迟 1 秒
+    await Future.delayed(const Duration(seconds: 1));
 
     update(["home"]);
   }
@@ -128,11 +132,6 @@ class HomeController extends GetxController {
     }
     update(["home_news_sell"]);
   }
-
-  // @override
-  // void onInit() {
-  //   super.onInit();
-  // }
 
   @override
   void onReady() {
