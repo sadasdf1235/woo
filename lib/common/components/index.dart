@@ -8,3 +8,4 @@ export './pin.dart';
 export './navigation.dart';
 export './carousel.dart';
 export './category_item.dart';
+export './product_item.dart';
