@@ -71,8 +71,16 @@ class HomeController extends GetxController {
   // 分类点击事件
   void onCategoryTap(int categoryId) {}
 
-  // ALL 点击事件
-  void onAllTap(bool featured) {}
+    // ALL 点击事件
+  void onAllTap(bool featured) {
+    Get.toNamed(
+      RouteNames.goodsProductList,
+      arguments: {
+        "featured": featured,
+      },
+    );
+  }
+
 
   /// 拉取数据
   /// isRefresh 是否是刷新
