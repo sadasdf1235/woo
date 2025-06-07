@@ -78,4 +78,7 @@ class LocaleKeys {
   static const gFlashSellTitle = "goods_flash_sell_title";
   static const gNewsTitle = "goods_news_title";
 
+    // 商品 - 分类
+  static const gCategoryTitle = "goods_category_title";
+
 }

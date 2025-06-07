@@ -53,6 +53,8 @@ class HomeController extends GetxController {
     Storage().setJson(Constants.storageHomeCategories, categoryItems);
     Storage().setJson(Constants.storageHomeFlashSell, flashShellProductList);
     Storage().setJson(Constants.storageHomeNewSell, newProductProductList);
+     // 保存离线数据 - 基础数据
+    Storage().setJson(Constants.storageProductsCategories, categoryItems);
 
     update(["home"]);
   }
