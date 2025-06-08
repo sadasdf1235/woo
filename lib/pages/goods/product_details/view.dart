@@ -44,10 +44,33 @@ class _ProductDetailsViewGetX extends GetView<ProductDetailsController> {
   @override
   String? get tag => uniqueTag;
 
-    // 滚动图
-  Widget _buildBanner() {
-    return const Text("滚动图");
+     // 滚动图
+  Widget _buildBanner(BuildContext context) {
+    return GetBuilder<ProductDetailsController>(
+        id: "product_banner",
+        tag: tag,
+        builder: (_) {
+          return CarouselWidget(
+            // 打开大图预览
+            // onTap: controller.onGalleryTap,
+            // 图片列表
+            items: controller.bannerItems,
+            // 当前索引
+            currentIndex: controller.bannerCurrentIndex,
+            // 切换回调
+            onPageChanged: controller.onChangeBanner,
+            // 高度
+            height: 190.w,
+            // 指示器圆点
+            indicatorCircle: false,
+            // 指示器位置
+            indicatorAlignment: MainAxisAlignment.start,
+            // 指示器颜色
+            indicatorColor: context.colors.scheme.secondary,
+          );
+        }).backgroundColor(context.colors.scheme.surface);
   }
+
 
   // 商品标题
   Widget _buildTitle() {
@@ -66,10 +89,12 @@ class _ProductDetailsViewGetX extends GetView<ProductDetailsController> {
 
 
     // 主视图
-  Widget _buildView() {
-    return <Widget>[
+  Widget _buildView(BuildContext context) {
+    return controller.product == null
+        ? const PlaceholdWidget() // 占位图
+        : <Widget>[
       // 滚动图
-      _buildBanner(),
+      _buildBanner(context),
 
       // 商品标题
       _buildTitle(),
@@ -92,12 +117,13 @@ class _ProductDetailsViewGetX extends GetView<ProductDetailsController> {
       tag: tag,
       builder: (_) {
         return Scaffold(
+          resizeToAvoidBottomInset: false,
           // 导航
           appBar: mainAppBarWidget(
               titleString:LocaleKeys.gDetailTitle.tr),
           // 内容
           body: SafeArea(
-            child: _buildView(),
+            child: _buildView(context),
           ),
         );
       },
