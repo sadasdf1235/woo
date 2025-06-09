@@ -107,14 +107,61 @@ class _ProductDetailsViewGetX extends GetView<ProductDetailsController> {
         .paddingAll(AppSpace.page);
   }
 
+  // Tab 栏位按钮
+  Widget _buildTabBarItem(BuildContext context, String textString, int index) {
+    return ButtonWidget.outline(
+      textString,
+      onTap: () => controller.onTapBarTap(index),
+      borderRadius: 17,
+      borderColor: Colors.transparent,
+      textColor: controller.tabIndex == index
+          ? context.colors.scheme.onSecondary
+          : context.colors.scheme.onPrimaryContainer,
+      backgroundColor: controller.tabIndex == index
+          ? context.colors.scheme.primary
+          : context.colors.scheme.onPrimary,
+    ).tight(
+      width: 100.w,
+      height: 35.h,
+    );
+  }
+
   // Tab 栏位
-  Widget _buildTabBar() {
-    return const Text("Tab 栏位");
+  Widget _buildTabBar(BuildContext context) {
+    return GetBuilder<ProductDetailsController>(
+      tag: tag,
+      id: "product_tab",
+      builder: (_) {
+        return <Widget>[
+          _buildTabBarItem(context, LocaleKeys.gDetailTabProduct.tr, 0),
+          _buildTabBarItem(context, LocaleKeys.gDetailTabDetails.tr, 1),
+          _buildTabBarItem(context, LocaleKeys.gDetailTabReviews.tr, 2),
+        ].toRowSpace(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.center,
+        );
+      },
+    );
   }
 
   // TabView 视图
   Widget _buildTabView() {
-    return const Text("TabView 视图");
+    return Expanded(
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(20.w, 0.w, 20.w, 0.w),
+        child: TabBarView(
+          controller: controller.tabController,
+          children: [
+            // 规格
+            TabProductView(uniqueTag: uniqueTag),
+            // 详情
+            TabDetailView(uniqueTag: uniqueTag),
+            // 评论
+            TabReviewsView(uniqueTag: uniqueTag),
+          ],
+        ),
+      ),
+    );
   }
 
   // 主视图
@@ -129,7 +176,7 @@ class _ProductDetailsViewGetX extends GetView<ProductDetailsController> {
             _buildTitle(context),
 
             // Tab 栏位
-            _buildTabBar(),
+            _buildTabBar(context),
 
             // TabView 视图
             _buildTabView(),
