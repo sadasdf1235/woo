@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:ducafe_ui_core/ducafe_ui_core.dart';
+import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
 import 'index.dart';
 import '/common/index.dart';
@@ -216,15 +217,21 @@ class _ProductDetailsViewGetX extends GetView<ProductDetailsController> {
       builder: (_) {
         return Scaffold(
           resizeToAvoidBottomInset: false,
+
           // 导航
           appBar: mainAppBarWidget(
               titleString:
                   controller.product?.name ?? LocaleKeys.gDetailTitle.tr),
+
           // 内容
           body: SafeArea(
             child: <Widget>[
               // 主视图
-              _buildView(context).expanded(),
+              SmartRefresher(
+                controller: controller.mainRefreshController, // 刷新控制器
+                onRefresh: controller.onMainRefresh, // 下拉刷新回调
+                child: _buildView(context),
+              ).expanded(),
 
               // 底部按钮
               _buildButtons(context),
