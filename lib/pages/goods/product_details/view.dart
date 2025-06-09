@@ -30,10 +30,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage>
   }
 }
 
-
 class _ProductDetailsViewGetX extends GetView<ProductDetailsController> {
-  
-
   // 1 定义唯一 tag 变量
   final String uniqueTag;
 
@@ -44,7 +41,7 @@ class _ProductDetailsViewGetX extends GetView<ProductDetailsController> {
   @override
   String? get tag => uniqueTag;
 
-     // 滚动图
+  // 滚动图
   Widget _buildBanner(BuildContext context) {
     return GetBuilder<ProductDetailsController>(
         id: "product_banner",
@@ -71,10 +68,43 @@ class _ProductDetailsViewGetX extends GetView<ProductDetailsController> {
         }).backgroundColor(context.colors.scheme.surface);
   }
 
-
   // 商品标题
-  Widget _buildTitle() {
-    return const Text("滚动图");
+  Widget _buildTitle(BuildContext context) {
+    return <Widget>[
+      // 金额、打分、喜欢
+      <Widget>[
+        // 金额
+        TextWidget.h3(
+          "\$${controller.product?.price ?? 0}",
+        ).expanded(),
+        // 打分
+        IconWidget.icon(
+          Icons.star,
+          text: "4.5",
+          size: 20,
+          color: context.colors.scheme.primary,
+        ).paddingRight(AppSpace.iconTextMedium),
+        // 喜欢
+        IconWidget.icon(
+          Icons.favorite,
+          text: "100+",
+          size: 20,
+          color: context.colors.scheme.primary,
+        ),
+      ].toRow(),
+
+      // 次标题
+      TextWidget.label(
+        controller.product?.shortDescription?.clearHtml ?? "-",
+      ),
+    ]
+        .toColumn(
+          // 左对齐
+          crossAxisAlignment: CrossAxisAlignment.start,
+          // 垂直间距
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        )
+        .paddingAll(AppSpace.page);
   }
 
   // Tab 栏位
@@ -87,26 +117,24 @@ class _ProductDetailsViewGetX extends GetView<ProductDetailsController> {
     return const Text("TabView 视图");
   }
 
-
-    // 主视图
+  // 主视图
   Widget _buildView(BuildContext context) {
     return controller.product == null
         ? const PlaceholdWidget() // 占位图
         : <Widget>[
-      // 滚动图
-      _buildBanner(context),
+            // 滚动图
+            _buildBanner(context),
 
-      // 商品标题
-      _buildTitle(),
+            // 商品标题
+            _buildTitle(context),
 
-      // Tab 栏位
-      _buildTabBar(),
+            // Tab 栏位
+            _buildTabBar(),
 
-      // TabView 视图
-      _buildTabView(),
-    ].toColumn();
+            // TabView 视图
+            _buildTabView(),
+          ].toColumn();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -119,8 +147,7 @@ class _ProductDetailsViewGetX extends GetView<ProductDetailsController> {
         return Scaffold(
           resizeToAvoidBottomInset: false,
           // 导航
-          appBar: mainAppBarWidget(
-              titleString:LocaleKeys.gDetailTitle.tr),
+          appBar: mainAppBarWidget(titleString: LocaleKeys.gDetailTitle.tr),
           // 内容
           body: SafeArea(
             child: _buildView(context),
@@ -129,5 +156,4 @@ class _ProductDetailsViewGetX extends GetView<ProductDetailsController> {
       },
     );
   }
-
 }
