@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 
 import 'package:get/get.dart';
+import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
 import '/common/index.dart';
 
@@ -38,6 +39,23 @@ class ProductDetailsController extends GetxController
 
   // 选中尺寸列表
   List<String> sizeKeys = [];
+
+  // 评论 刷新控制器
+  final RefreshController reviewsRefreshController = RefreshController(
+    initialRefresh: true,
+  );
+
+  // reviews 评论列表
+  List<ReviewModel> reviews = [];
+
+  // 评论图片列表 测试用
+  List<String> reviewImages = [];
+
+  // 评论 页码
+  int _reviewsPage = 1;
+
+  // 评论 页尺寸
+  int _reviewsLimit = 20;
 
   _initData() async {
     await _loadProduct();
@@ -85,6 +103,21 @@ class ProductDetailsController extends GetxController
         sizeKeys = sizeAttr?.first.options ?? [];
       }
     }
+
+    // 评论
+    reviews = await ProductApi.reviews(ReviewsReq(
+      product: productId,
+    ));
+
+    // 评论图片，测试用
+    reviewImages.addAll([
+      "https://ducafecat.oss-cn-beijing.aliyuncs.com/bag/718Y%2BhJkMgL._AC_UY695_.jpg",
+      "https://ducafecat.oss-cn-beijing.aliyuncs.com/bag/71n8Tg2ClZL._AC_UY695_.jpg",
+      "https://ducafecat.oss-cn-beijing.aliyuncs.com/bag/819mEKajDML._AC_UY695_.jpg",
+      "https://ducafecat.oss-cn-beijing.aliyuncs.com/bag/81J0UFuJHdL._AC_UY695_.jpg",
+      "https://ducafecat.oss-cn-beijing.aliyuncs.com/bag/81M4BxGW4TL._AC_UY695_.jpg",
+      "https://ducafecat.oss-cn-beijing.aliyuncs.com/bag/81s6OXEsZCL._AC_UY695_.jpg",
+    ]);
   }
 
   // Banner 切换事件
@@ -147,6 +180,81 @@ class ProductDetailsController extends GetxController
     update(["product_sizes"]);
   }
 
+  // 评论 拉取数据
+  Future<bool> _loadReviews(bool isRefresh) async {
+    // 拉取数据
+    // 评论
+    var reviewsListTmp = await ProductApi.reviews(ReviewsReq(
+      // 刷新, 重置页数1
+      page: isRefresh ? 1 : _reviewsPage,
+      // 每页条数
+      prePage: _reviewsLimit,
+      // 商品id
+      product: productId,
+    ));
+
+    // 更新数据
+    if (isRefresh) {
+      _reviewsPage = 1; // 重置页数1
+      reviews.clear(); // 清空数据
+    }
+
+    if (reviewsListTmp.isNotEmpty) {
+      _reviewsPage++; // 页数+1
+      reviews.addAll(reviewsListTmp); // 添加数据
+    }
+
+    return reviewsListTmp.isEmpty;
+  }
+
+  // 评论 下拉刷新
+  void onReviewsRefresh() async {
+    try {
+      // 拉取数据是否为空
+      await _loadReviews(true);
+
+      // 刷新完成
+      reviewsRefreshController.refreshCompleted();
+    } catch (error) {
+      // 刷新失败
+      reviewsRefreshController.refreshFailed();
+    }
+    update(["product_reviews"]);
+  }
+
+  // 评论 上拉载入新商品
+  void onReviewsLoading() async {
+    if (reviews.isNotEmpty) {
+      try {
+        // 拉取数据是否为空
+        var isEmpty = await _loadReviews(false);
+
+        if (isEmpty) {
+          // 设置无数据
+          reviewsRefreshController.loadNoData();
+        } else {
+          // 加载完成
+          reviewsRefreshController.loadComplete();
+        }
+      } catch (e) {
+        // 加载失败
+        reviewsRefreshController.loadFailed();
+      }
+    } else {
+      // 设置无数据
+      reviewsRefreshController.loadNoData();
+    }
+    update(["product_reviews"]);
+  }
+
+  // 评论图片浏览
+  void onReviewsGalleryTap(int index) {
+    Get.to(GalleryWidget(
+      initialIndex: index,
+      items: reviewImages,
+    ));
+  }
+
   // @override
   // void onInit() {
   //   super.onInit();
@@ -161,6 +269,11 @@ class ProductDetailsController extends GetxController
   @override
   void onClose() {
     super.onClose();
+
+    // 释放 tab 控制器
     tabController.dispose();
+
+    // 释放 评论下拉控制器
+    reviewsRefreshController.dispose();
   }
 }
