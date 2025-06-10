@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
 
 import '/common/index.dart';
@@ -20,6 +22,9 @@ class SearchFilterController extends GetxController {
   KeyValueModel orderSelected =
       KeyValueModel(key: "rating", value: "Best Match");
 
+  // 全局 key
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
   _initData() {
     update(["search_filter"]);
   }
@@ -30,6 +35,16 @@ class SearchFilterController extends GetxController {
   void onOrderTap(KeyValueModel? val) {
     orderSelected = val!;
     update(["search_filter"]);
+  }
+
+  // 筛选 打开
+  void onFilterOpenTap() {
+    scaffoldKey.currentState?.openEndDrawer();
+  }
+
+  // 筛选 关闭
+  void onFilterCloseTap() {
+    Get.back();
   }
 
   // @override

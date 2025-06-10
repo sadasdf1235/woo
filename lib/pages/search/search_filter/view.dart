@@ -33,6 +33,7 @@ class SearchFilterPage extends GetView<SearchFilterController> {
       // 筛选 Filter
       ButtonWidget.outline(
         LocaleKeys.searchFilter.tr,
+        onTap: controller.onFilterOpenTap,
         // 反向
         reverse: true,
         // 主轴对齐
@@ -99,6 +100,11 @@ class SearchFilterPage extends GetView<SearchFilterController> {
 
           // 内容
           body: _buildView(context),
+
+          // 右侧弹出 Drawer
+          endDrawer: const Drawer(
+            child: SafeArea(child: FilterView()),
+          ),
         );
       },
     );
