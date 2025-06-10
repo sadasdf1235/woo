@@ -68,6 +68,8 @@ dependencies:
   photo_view: ^0.15.0
   # 下拉菜单
   dropdown_button2: ^2.3.9
+  # 滑块
+  another_xlider: ^3.0.2
 
 dev_dependencies:
   flutter_test:

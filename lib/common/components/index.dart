@@ -17,3 +17,4 @@ export './colors_list.dart';
 export './tags_list.dart';
 export './stars_list.dart';
 export './dropdown.dart';
+export './price_range.dart';
