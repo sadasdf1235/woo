@@ -17,7 +17,7 @@ Map<String, String> localeEn = {
   // 样式
   LocaleKeys.stylesTitle: 'Sytles && Function',
 
-    // welcome 欢迎
+  // welcome 欢迎
   LocaleKeys.welcomeOneTitle: 'Choose Your Desire Product',
   LocaleKeys.welcomeOneDesc:
       'Contrary to popular belief, Lorem Ipsum is not simply random text',
@@ -31,7 +31,7 @@ Map<String, String> localeEn = {
   LocaleKeys.welcomeNext: 'Next',
   LocaleKeys.welcomeStart: 'Get Started',
 
-    // 登录、注册 - 通用
+  // 登录、注册 - 通用
   LocaleKeys.loginForgotPassword: 'Forgot Password?',
   LocaleKeys.loginSignIn: 'Sign In',
   LocaleKeys.loginSignUp: 'Sign Up',
@@ -48,7 +48,7 @@ Map<String, String> localeEn = {
   LocaleKeys.registerFormLastName: 'Last name',
   LocaleKeys.registerHaveAccount: 'Already have an account?',
 
-    // 验证提示
+  // 验证提示
   LocaleKeys.validatorRequired: 'The field is obligatory',
   LocaleKeys.validatorEmail: 'The field must be an email',
   LocaleKeys.validatorMin: 'Length cannot be less than @size',
@@ -56,31 +56,31 @@ Map<String, String> localeEn = {
   LocaleKeys.validatorPassword:
       'password must have between @min and @max digits',
 
-        // 注册PIN - register pin
+  // 注册PIN - register pin
   LocaleKeys.registerPinTitle: 'Verification',
   LocaleKeys.registerPinDesc: 'we will send you a Pin to continue your account',
   LocaleKeys.registerPinFormTip: 'Pin',
   LocaleKeys.registerPinButton: 'Submit',
 
-      // 登录 - back login
+  // 登录 - back login
   LocaleKeys.loginBackTitle: 'Welcome login!',
   LocaleKeys.loginBackDesc: 'Sign in to continue',
   LocaleKeys.loginBackFieldEmail: 'Name',
   LocaleKeys.loginBackFieldPassword: 'Password',
 
-    // APP 导航
+  // APP 导航
   LocaleKeys.tabBarHome: 'Home',
   LocaleKeys.tabBarCart: 'Cart',
   LocaleKeys.tabBarMessage: 'Message',
   LocaleKeys.tabBarProfile: 'Profile',
 
-    // 商品 - 首页
+  // 商品 - 首页
   LocaleKeys.gHomeSearch: 'Search',
   LocaleKeys.gHomeFlashSell: 'Flash Sale',
   LocaleKeys.gHomeNewProduct: 'New Product',
   LocaleKeys.gHomeMore: 'More',
 
-    // 商品 - 列表
+  // 商品 - 列表
   LocaleKeys.gFlashSellTitle: 'Flash Sell',
   LocaleKeys.gNewsTitle: 'New Product',
 
@@ -95,4 +95,15 @@ Map<String, String> localeEn = {
   LocaleKeys.gDetailBtnAddCart: 'Add To Cart',
   LocaleKeys.gDetailBtnBuy: 'Buy Now',
 
+  // 搜索
+  LocaleKeys.searchPlaceholder: 'Search Product',
+  LocaleKeys.searchOrder: 'Best Match',
+  LocaleKeys.searchFilter: 'Filter',
+  LocaleKeys.searchFilterPrice: 'Price',
+  LocaleKeys.searchFilterSize: 'Size',
+  LocaleKeys.searchFilterColor: 'Color',
+  LocaleKeys.searchFilterReview: 'Review',
+  LocaleKeys.searchFilterBrand: 'Brand',
+  LocaleKeys.searchFilterGender: 'Gender',
+  LocaleKeys.searchFilterCondition: 'Condition',
 };

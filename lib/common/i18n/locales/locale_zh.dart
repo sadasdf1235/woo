@@ -17,7 +17,7 @@ Map<String, String> localeZh = {
   // 样式
   LocaleKeys.stylesTitle: '样式 && 功能 && 调试',
 
-    // welcome 欢迎
+  // welcome 欢迎
   LocaleKeys.welcomeOneTitle: '选择您喜欢的产品',
   LocaleKeys.welcomeOneDesc:
       'Contrary to popular belief, Lorem Ipsum is not simply random text',
@@ -31,7 +31,7 @@ Map<String, String> localeZh = {
   LocaleKeys.welcomeNext: '下一页',
   LocaleKeys.welcomeStart: '立刻开始',
 
-    // 登录、注册 - 通用
+  // 登录、注册 - 通用
   LocaleKeys.loginForgotPassword: '忘记密码?',
   LocaleKeys.loginSignIn: '登 陆',
   LocaleKeys.loginSignUp: '注 册',
@@ -48,7 +48,7 @@ Map<String, String> localeZh = {
   LocaleKeys.registerFormLastName: '名',
   LocaleKeys.registerHaveAccount: '你有现成账号?',
 
-    // 验证提示
+  // 验证提示
   LocaleKeys.validatorRequired: '字段不能为空',
   LocaleKeys.validatorEmail: '请输入 email 格式',
   LocaleKeys.validatorMin: '长度不能小于 @size',
@@ -61,25 +61,25 @@ Map<String, String> localeZh = {
   LocaleKeys.registerPinFormTip: 'Pin',
   LocaleKeys.registerPinButton: '提交',
 
-    // 登录 - back login
+  // 登录 - back login
   LocaleKeys.loginBackTitle: '欢迎登陆!',
   LocaleKeys.loginBackDesc: '登陆后继续',
   LocaleKeys.loginBackFieldEmail: '账号',
   LocaleKeys.loginBackFieldPassword: '登陆密码',
 
-    // APP 导航
+  // APP 导航
   LocaleKeys.tabBarHome: '首页',
   LocaleKeys.tabBarCart: '购物车',
   LocaleKeys.tabBarMessage: '消息',
   LocaleKeys.tabBarProfile: '我的',
 
-    // 商品 - 首页
+  // 商品 - 首页
   LocaleKeys.gHomeSearch: '搜索',
   LocaleKeys.gHomeFlashSell: '限时抢购',
   LocaleKeys.gHomeNewProduct: '新品',
   LocaleKeys.gHomeMore: '更多',
 
-    // 商品 - 列表
+  // 商品 - 列表
   LocaleKeys.gFlashSellTitle: '热卖商品列表',
   LocaleKeys.gNewsTitle: '新商品列表',
 
@@ -94,4 +94,15 @@ Map<String, String> localeZh = {
   LocaleKeys.gDetailBtnAddCart: '加入购物车',
   LocaleKeys.gDetailBtnBuy: '立刻购买',
 
+  // 搜索
+  LocaleKeys.searchPlaceholder: '搜索商品',
+  LocaleKeys.searchOrder: '最佳匹配',
+  LocaleKeys.searchFilter: '筛选',
+  LocaleKeys.searchFilterPrice: '价格',
+  LocaleKeys.searchFilterSize: '尺寸',
+  LocaleKeys.searchFilterColor: '颜色',
+  LocaleKeys.searchFilterReview: '星级',
+  LocaleKeys.searchFilterBrand: '品牌',
+  LocaleKeys.searchFilterGender: '性别',
+  LocaleKeys.searchFilterCondition: '状况',
 };
