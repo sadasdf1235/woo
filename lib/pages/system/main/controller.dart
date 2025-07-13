@@ -7,21 +7,20 @@ import '/common/index.dart';
 class MainController extends GetxController {
   MainController();
 
-    // 分页管理
+  // 分页管理
   final PageController pageController = PageController();
 
-    // 当前的 tab index
+  // 当前的 tab index
   int currentIndex = 0;
 
-
-  _initData () async {
+  _initData() async {
     // 读取用户 profile
     await UserService.to.getProfile();
 
     update(["main"]);
   }
 
-    // 导航栏切换
+  // 导航栏切换
   void onIndexChanged(int index) {
     currentIndex = index;
     update(['navigation']);
@@ -29,15 +28,18 @@ class MainController extends GetxController {
 
   // 切换页面
   void onJumpToPage(int page) {
-    pageController.jumpToPage(page);
+    // 除了首页，其它页面都需要登录
+    if ((page != 0) && !UserService.to.isLogin) {
+      Get.toNamed(RouteNames.systemLogin);
+    } else {
+      pageController.jumpToPage(page);
+    }
   }
-
 
   void onTap() {}
 
-    // 退出请求时间
+  // 退出请求时间
   DateTime? currentBackPressTime;
-
 
   // 返回键退出
   bool closeOnConfirm(BuildContext context) {
@@ -61,7 +63,6 @@ class MainController extends GetxController {
     return true;
   }
 
-
   // @override
   // void onInit() {
   //   super.onInit();
@@ -76,12 +77,10 @@ class MainController extends GetxController {
     Get.toNamed(RouteNames.systemRegister);
   }
 
-
-   @override
+  @override
   void onClose() {
     super.onClose();
     // 释放页控制器
     pageController.dispose();
   }
-
 }

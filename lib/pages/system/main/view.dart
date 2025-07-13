@@ -28,7 +28,7 @@ class _MainPageState extends State<MainPage>
 class _MainViewGetX extends GetView<MainController> {
   const _MainViewGetX({Key? key}) : super(key: key);
 
-    // 主视图
+  // 主视图
   Widget _buildView(BuildContext context) {
     return PopScope(
       // 允许返回
@@ -96,7 +96,6 @@ class _MainViewGetX extends GetView<MainController> {
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<MainController>(
@@ -104,10 +103,7 @@ class _MainViewGetX extends GetView<MainController> {
       id: "main",
       builder: (_) {
         return Scaffold(
-          appBar: AppBar(title: const Text("main")),
-          body: SafeArea(
-            child: _buildView(context),
-          ),
+          body: _buildView(context),
         );
       },
     );
