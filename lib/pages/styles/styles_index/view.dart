@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
 
-import '../../../common/index.dart';
+import '/common/index.dart';
 import 'index.dart';
 
 class StylesIndexPage extends GetView<StylesIndexController> {
@@ -30,7 +31,11 @@ class StylesIndexPage extends GetView<StylesIndexController> {
         onTap: () => Get.toNamed(RouteNames.stylesTextForm),
         title: const Text("form 表单"),
       ),
-
+      // ListTile 列表项
+      ListTile(
+        onTap: () => Get.toNamed(RouteNames.stylesListTile),
+        title: const Text("ListTile 列表项"),
+      ),
     ]);
   }
 

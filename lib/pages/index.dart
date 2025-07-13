@@ -37,6 +37,7 @@ export 'styles/other/index.dart';
 export 'styles/styles_index/index.dart';
 export 'styles/text/index.dart';
 export 'styles/text_form/index.dart';
+export 'styles/list_tile/index.dart';
 
 export 'system/login/index.dart';
 export 'system/main/index.dart';

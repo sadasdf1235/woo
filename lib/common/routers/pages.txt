@@ -24,16 +24,24 @@
         page: () => const HomePage(),
       ),
       GetPage(
+        name: RouteNames.goodsHomeWidget,
+        page: () => const WidgetPage(),
+      ),
+      GetPage(
         name: RouteNames.goodsProductDetails,
         page: () => const ProductDetailsPage(),
+      ),
+      GetPage(
+        name: RouteNames.goodsProductDetailsWidgets,
+        page: () => const WidgetsPage(),
       ),
       GetPage(
         name: RouteNames.goodsProductList,
         page: () => const ProductListPage(),
       ),
       GetPage(
-        name: RouteNames.msg,
-        page: () => const MsgPage(),
+        name: RouteNames.msgMsgIndex,
+        page: () => const MsgIndexPage(),
       ),
       GetPage(
         name: RouteNames.myAddressEdit,
@@ -56,6 +64,10 @@
         page: () => const MyIndexPage(),
       ),
       GetPage(
+        name: RouteNames.myMyIndexWidgets,
+        page: () => const WidgetsPage(),
+      ),
+      GetPage(
         name: RouteNames.myOrderDetails,
         page: () => const OrderDetailsPage(),
       ),
@@ -74,6 +86,10 @@
       GetPage(
         name: RouteNames.searchSearchFilter,
         page: () => const SearchFilterPage(),
+      ),
+      GetPage(
+        name: RouteNames.searchSearchFilterWidget,
+        page: () => const WidgetPage(),
       ),
       GetPage(
         name: RouteNames.searchSearchIndex,
@@ -110,6 +126,10 @@
       GetPage(
         name: RouteNames.stylesInputs,
         page: () => const InputsPage(),
+      ),
+      GetPage(
+        name: RouteNames.stylesListTile,
+        page: () => const ListTilePage(),
       ),
       GetPage(
         name: RouteNames.stylesOther,

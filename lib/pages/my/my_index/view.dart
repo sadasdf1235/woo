@@ -121,7 +121,20 @@ class MyIndexPage extends GetView<MyIndexController> {
 
   // 按钮列表
   Widget _buildButtonsList(BuildContext context) {
-    return const Text("按钮列表");
+    return <Widget>[
+      // 样式页
+      ListTileWidget(
+        title: const Text("样式页"),
+        leading: const IconWidget.svg(
+          AssetsSvgs.cBagSvg,
+          size: 28,
+        ),
+        trailing: const <Widget>[
+          IconWidget.icon(Icons.arrow_forward_ios),
+        ],
+        onTap: () => Get.toNamed(RouteNames.stylesIndex),
+      ),
+    ].toColumn().card();
   }
 
   // 主视图

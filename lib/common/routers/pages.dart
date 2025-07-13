@@ -134,6 +134,10 @@ class RoutePages {
       page: () => const LoginPage(),
     ),
     GetPage(
+      name: RouteNames.stylesListTile,
+      page: () => const ListTilePage(),
+    ),
+    GetPage(
       name: RouteNames.systemMain,
       page: () => const MainPage(),
       binding: MainBinding(),
