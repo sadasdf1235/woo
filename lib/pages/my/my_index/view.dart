@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 import 'package:get/get.dart';
 import 'package:ducafe_ui_core/ducafe_ui_core.dart';
@@ -8,6 +9,32 @@ import 'index.dart';
 
 class MyIndexPage extends GetView<MyIndexController> {
   const MyIndexPage({super.key});
+
+  // 列表项
+  Widget _buildListItem({
+    required String txtTitle,
+    required String svgPath,
+    Function()? onTap,
+  }) {
+    // 随机颜色
+    Color? iconColor;
+    iconColor = Colors.primaries[Random().nextInt(Colors.primaries.length)];
+
+    // 列表项
+    return ListTileWidget(
+      title: TextWidget.label(txtTitle),
+      leading: IconWidget.svg(
+        svgPath,
+        size: 18,
+        color: Colors.white,
+      ).paddingAll(6).decorated(
+            color: iconColor,
+            borderRadius: BorderRadius.circular(30),
+          ),
+      trailing: const <Widget>[IconWidget.icon(Icons.arrow_forward_ios)],
+      onTap: onTap,
+    ).height(50);
+  }
 
   // 顶部 APP 导航栏
   Widget _buildAppBar(BuildContext context) {
@@ -116,25 +143,65 @@ class MyIndexPage extends GetView<MyIndexController> {
 
   // My Order
   Widget _buildMyOrder(BuildContext context) {
-    return const Text("My Order");
+    return _buildListItem(
+      txtTitle: LocaleKeys.myBtnMyOrder.tr,
+      svgPath: AssetsSvgs.pDeliverySvg,
+      onTap: () => Get.toNamed(RouteNames.myOrderList),
+    ).card().paddingVertical(AppSpace.page);
   }
 
   // 按钮列表
   Widget _buildButtonsList(BuildContext context) {
     return <Widget>[
+      // Edit Profile
+      _buildListItem(
+        txtTitle: LocaleKeys.myBtnEditProfile.tr,
+        svgPath: AssetsSvgs.pCurrencySvg,
+        onTap: () => Get.toNamed(RouteNames.myProfileEdit),
+      ),
+
+      // Billing Address
+      _buildListItem(
+        txtTitle: LocaleKeys.myBtnBillingAddress.tr,
+        svgPath: AssetsSvgs.pHomeSvg,
+        onTap: () => Get.toNamed(RouteNames.myProfileEdit),
+      ),
+
+      // Billing Address
+      _buildListItem(
+        txtTitle: LocaleKeys.myBtnShippingAddress.tr,
+        svgPath: AssetsSvgs.pHomeSvg,
+        onTap: () => Get.toNamed(RouteNames.myProfileEdit),
+      ),
+
+      // Language
+      _buildListItem(
+        txtTitle: LocaleKeys.myBtnLanguage.tr,
+        svgPath: AssetsSvgs.pTranslateSvg,
+        onTap: () => Get.toNamed(RouteNames.myLanguage),
+      ),
+
       // 样式页
-      ListTileWidget(
-        title: const Text("样式页"),
-        leading: const IconWidget.svg(
-          AssetsSvgs.cBagSvg,
-          size: 28,
-        ),
-        trailing: const <Widget>[
-          IconWidget.icon(Icons.arrow_forward_ios),
-        ],
+      _buildListItem(
+        txtTitle: LocaleKeys.myBtnStyles.tr,
+        svgPath: AssetsSvgs.cBagSvg,
         onTap: () => Get.toNamed(RouteNames.stylesIndex),
       ),
-    ].toColumn().card();
+
+      // Theme
+      _buildListItem(
+        txtTitle: LocaleKeys.myBtnTheme.tr,
+        svgPath: AssetsSvgs.pThemeSvg,
+        onTap: () => ConfigService.to.switchThemeMode(),
+      ),
+
+      // 调试工具
+      _buildListItem(
+        txtTitle: LocaleKeys.myBtnStyles.tr,
+        svgPath: AssetsSvgs.pCurrencySvg,
+        onTap: () => Get.toNamed(RouteNames.stylesIndex),
+      ),
+    ].toColumn().card().paddingVertical(AppSpace.page);
   }
 
   // 主视图
