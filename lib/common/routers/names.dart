@@ -34,6 +34,7 @@ class RouteNames {
   static const myOrderList = '/my_order_list';
   static const myProfileEdit = '/my_profile_edit';
   static const myTheme = '/my_theme';
+  static const myAddress = '/my_address';
 
   static const goodsCategory = '/goods_category';
   static const goodsHome = '/goods_home';

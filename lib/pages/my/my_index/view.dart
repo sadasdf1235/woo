@@ -164,14 +164,14 @@ class MyIndexPage extends GetView<MyIndexController> {
       _buildListItem(
         txtTitle: LocaleKeys.myBtnBillingAddress.tr,
         svgPath: AssetsSvgs.pHomeSvg,
-        onTap: () => Get.toNamed(RouteNames.myProfileEdit),
+        onTap: () => controller.onToAddress("Billing"), // 类型 billing
       ),
 
       // Billing Address
       _buildListItem(
         txtTitle: LocaleKeys.myBtnShippingAddress.tr,
         svgPath: AssetsSvgs.pHomeSvg,
-        onTap: () => Get.toNamed(RouteNames.myProfileEdit),
+        onTap: () => controller.onToAddress("Shipping"), // 类型 shipping
       ),
 
       // Language
