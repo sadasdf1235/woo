@@ -19,3 +19,4 @@ export './stars_list.dart';
 export './dropdown.dart';
 export './price_range.dart';
 export './list_tile.dart';
+export './bottom_sheet.dart';

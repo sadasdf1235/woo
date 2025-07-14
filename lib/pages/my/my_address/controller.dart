@@ -33,6 +33,11 @@ class MyAddressController extends GetxController {
   // 大陆国家数据
   List<PickerItem> countriesList = [];
 
+  // 洲省数据
+  List<PickerItem> statesList = [];
+  // 洲省市选择
+  List<int> statesSels = [];
+
   // 国家选择
   List<int> countrySels = [];
 
@@ -85,6 +90,13 @@ class MyAddressController extends GetxController {
         break;
       }
     }
+
+    // 洲省代码
+    String statesCode = statesController.text;
+    // 洲选择器数据
+    _filterStates(countryCode);
+    // 洲省选择器 - 选中 index
+    statesSels = [statesList.indexWhere((el) => el.value == statesCode)];
 
     update(["my_address"]);
   }
@@ -151,6 +163,24 @@ class MyAddressController extends GetxController {
     });
   }
 
+  // 取洲省数据
+  void _filterStates(String countryCode) {
+    for (var continent in continents) {
+      var country =
+          continent.countries?.firstWhereOrNull((el) => el.code == countryCode);
+      if (country != null) {
+        statesList = List.generate(country.states?.length ?? 0, (index) {
+          var state = country.states?.elementAt(index);
+          return PickerItem(
+            text: Text(state?.name ?? "-"),
+            value: state?.code ?? "-",
+          );
+        });
+        break;
+      }
+    }
+  }
+
   // 国家选择
   void onCountryPicker() async {
     BottomSheetWidget.show(
@@ -172,6 +202,7 @@ class MyAddressController extends GetxController {
           if (selectedValues.isNotEmpty) {
             final selectedCountry = selectedValues.last as String;
             countryController.text = selectedCountry;
+            _filterStates(selectedCountry); // 加入筛选 洲省
             update(["my_address"]);
           }
         },
@@ -185,7 +216,25 @@ class MyAddressController extends GetxController {
       context: Get.context!,
       titleString: "州/省",
       padding: 20,
-      content: const Text("州/省 content").height(200),
+      content: Picker(
+        adapter: PickerDataAdapter(data: statesList),
+        selecteds: statesSels,
+        itemExtent: 40,
+        height: 270,
+        backgroundColor: Colors.transparent,
+        containerColor: Colors.transparent,
+        cancelText: LocaleKeys.commonBottomCancel.tr,
+        confirmText: LocaleKeys.commonBottomConfirm.tr,
+        onConfirm: (Picker picker, List<int> value) {
+          statesSels = value;
+          final selectedValues = picker.getSelectedValues();
+          if (selectedValues.isNotEmpty) {
+            final selectedState = selectedValues.last as String;
+            statesController.text = selectedState;
+            update(["my_address"]);
+          }
+        },
+      ).makePicker(),
     );
   }
 
