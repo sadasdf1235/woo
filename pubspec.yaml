@@ -70,6 +70,8 @@ dependencies:
   dropdown_button2: ^2.3.9
   # 滑块
   another_xlider: ^3.0.2
+  # 选择器
+  flutter_picker_plus: ^1.5.2
 
 dev_dependencies:
   flutter_test:
