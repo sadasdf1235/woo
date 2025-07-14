@@ -19,6 +19,8 @@ class InputFormFieldWidget extends FormField<String> {
     this.cleanable,
     this.keyboardType,
     this.autofocus,
+    this.readOnly,
+    this.onTap,
     Function(String?)? validator,
   }) : super(
           initialValue: initValue ?? controller?.text,
@@ -49,6 +51,8 @@ class InputFormFieldWidget extends FormField<String> {
                 obscureText: obscureText ?? false,
                 cleanable: cleanable ?? true,
                 onChanged: onChangedHandler,
+                readOnly: readOnly ?? false,
+                onTap: onTap,
               ),
 
               // 提示词
@@ -104,6 +108,12 @@ class InputFormFieldWidget extends FormField<String> {
 
   /// 自动焦点
   final bool? autofocus;
+
+  /// 是否只读
+  final bool? readOnly;
+
+  /// 点击事件
+  final void Function()? onTap;
 
   @override
   InputFormWidgetFieldState createState() => InputFormWidgetFieldState();
