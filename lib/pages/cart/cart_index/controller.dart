@@ -7,6 +7,9 @@ class CartIndexController extends GetxController {
 
   // 商品是否选中
   List<int> selectedIds = [];
+  // 优惠券代码
+  String couponCode = '';
+
   // 是否全选
   bool get isSelectedAll => CartService.to.lineItems.isEmpty
       ? false
@@ -50,6 +53,27 @@ class CartIndexController extends GetxController {
     }
     selectedIds.clear();
     update(["cart_index"]);
+  }
+
+  // 应用优惠券, 568935ab
+  Future<void> onApplyCoupon() async {
+    if (couponCode.isEmpty) {
+      Loading.error("Voucher code empty.");
+      return;
+    }
+    CouponsModel? coupon = await CouponApi.couponDetail(couponCode);
+    if (coupon != null) {
+      couponCode = "";
+      bool isSuccess = CartService.to.applyCoupon(coupon);
+      if (isSuccess) {
+        Loading.success("Coupon applied.");
+      } else {
+        Loading.error("Coupon is already applied.");
+      }
+      update(["cart_index"]);
+    } else {
+      Loading.error("Coupon code is not valid.");
+    }
   }
 
   _initData() {
