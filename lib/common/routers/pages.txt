@@ -16,6 +16,10 @@
         page: () => const CartIndexPage(),
       ),
       GetPage(
+        name: RouteNames.cartCartIndexWidget,
+        page: () => const WidgetPage(),
+      ),
+      GetPage(
         name: RouteNames.goodsCategory,
         page: () => const CategoryPage(),
       ),
@@ -106,6 +110,10 @@
       GetPage(
         name: RouteNames.stylesCarousel,
         page: () => const CarouselPage(),
+      ),
+      GetPage(
+        name: RouteNames.stylesCheckbox,
+        page: () => const CheckboxPage(),
       ),
       GetPage(
         name: RouteNames.stylesComponents,

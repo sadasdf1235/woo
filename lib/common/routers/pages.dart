@@ -138,6 +138,10 @@ class RoutePages {
       page: () => const ListTilePage(),
     ),
     GetPage(
+      name: RouteNames.stylesCheckbox,
+      page: () => const CheckboxPage(),
+    ),
+    GetPage(
       name: RouteNames.systemMain,
       page: () => const MainPage(),
       binding: MainBinding(),

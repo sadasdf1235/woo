@@ -22,6 +22,7 @@ class RouteNames {
   static const stylesText = '/styles_text';
   static const stylesTextForm = '/styles_text_form';
   static const stylesListTile = '/styles_list_tile';
+  static const stylesCheckbox = '/styles_checkbox';
 
   static const searchSearchFilter = '/search_search_filter';
   static const searchSearchIndex = '/search_search_index';
