@@ -14,7 +14,6 @@ class CartIndexPage extends GetView<CartIndexController> {
     return ListView.separated(
       itemBuilder: (BuildContext context, int index) {
         LineItem item = CartService.to.lineItems[index];
-        // 购物车项
         return CartItem(
           lineItem: item,
           // 是否选中
@@ -22,7 +21,14 @@ class CartIndexPage extends GetView<CartIndexController> {
           // 选中回调
           onSelect: (isSelected) =>
               controller.onSelect(item.productId!, isSelected!),
-        ).paddingAll(AppSpace.card).card();
+
+          // 修改数量
+          onChangeQuantity: (quantity) =>
+              controller.onChangeQuantity(item, quantity),
+        ).paddingAll(AppSpace.card).card(
+              color: context.colors.scheme.surface,
+              margin: EdgeInsets.zero,
+            );
       },
       separatorBuilder: (BuildContext context, int index) {
         return SizedBox(height: AppSpace.listRow);
