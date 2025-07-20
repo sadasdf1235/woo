@@ -171,6 +171,7 @@ class _ProductDetailsViewGetX extends GetView<ProductDetailsController> {
       // 加入购物车
       ButtonWidget.outline(
         LocaleKeys.gDetailBtnAddCart.tr,
+        onTap: controller.onAddCartTap,
       ).expanded(),
 
       // 间距
