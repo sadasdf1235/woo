@@ -180,6 +180,7 @@ class _ProductDetailsViewGetX extends GetView<ProductDetailsController> {
       // 立刻购买
       ButtonWidget.primary(
         LocaleKeys.gDetailBtnBuy.tr,
+        onTap: controller.onCheckoutTap, // 立刻购买事件
       ).expanded(),
     ]
         .toRow(
