@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '/common/index.dart';
+
 class BuyDoneController extends GetxController {
   BuyDoneController();
 

@@ -62,7 +62,7 @@ class BuyNowPage extends GetView<BuyNowController> {
       // 立刻购买 Place Order
       ButtonWidget.primary(
         LocaleKeys.placeOrderBtnPlaceOrder.tr,
-        onTap: controller.onCheckout,
+        onTap: controller.onCheckout, // 立刻购买事件
       ).expanded(),
     ].toRow(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
