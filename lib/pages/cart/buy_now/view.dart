@@ -95,6 +95,43 @@ class BuyNowPage extends GetView<BuyNowController> {
         .paddingBottom(AppSpace.listRow);
   }
 
+  // 小计
+  Widget _buildPrice(BuildContext context) {
+    return <Widget>[
+      // Shipping: $2.05
+      BuildPriceLine(
+        titleString: LocaleKeys.placeOrderPriceShipping.tr,
+        priceString: "\$${controller.shipping}",
+      ),
+
+      // Discount: $3.05
+      BuildPriceLine(
+        titleString: LocaleKeys.placeOrderPriceDiscount.tr,
+        priceString: "\$${controller.discount}",
+      ),
+
+      // Voucher Code:
+      BuildPriceLine(
+        titleString: LocaleKeys.placeOrderPriceVoucherCode.tr,
+        rightWidget: ButtonWidget.ghost(
+          LocaleKeys.placeOrderPriceVoucherCodeEnter.tr,
+          textColor: context.colors.scheme.secondary,
+          scale: WidgetScale.small,
+          // onTap: controller.onEnterCouponCode, // 输入优惠券码
+        ),
+      ),
+
+      // Total: $14.60
+      BuildPriceLine(
+        leftWidget: TextWidget.label(LocaleKeys.placeOrderTotal.tr),
+        rightWidget: TextWidget.label(
+            "\$${controller.totalPrice - controller.discount}"),
+      ),
+
+      //
+    ].toColumn();
+  }
+
   // 主视图
   Widget _buildView(BuildContext context) {
     return <Widget>[
@@ -108,6 +145,14 @@ class BuyNowPage extends GetView<BuyNowController> {
 
       // 数量
       _buildTitle(LocaleKeys.placeOrderQuantity.tr),
+      QuantityWidget(
+        quantity: controller.quantity,
+        onChange: controller.onQuantityChange,
+      ).paddingBottom(AppSpace.listRow),
+
+      // 小计
+      _buildTitle(LocaleKeys.placeOrderPrice.tr),
+      _buildPrice(context),
 
       // 小计
       _buildTitle(LocaleKeys.placeOrderPrice.tr),
