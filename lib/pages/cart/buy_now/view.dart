@@ -117,7 +117,7 @@ class BuyNowPage extends GetView<BuyNowController> {
           LocaleKeys.placeOrderPriceVoucherCodeEnter.tr,
           textColor: context.colors.scheme.secondary,
           scale: WidgetScale.small,
-          // onTap: controller.onEnterCouponCode, // 输入优惠券码
+          onTap: controller.onEnterCouponCode, // 输入优惠券码
         ),
       ),
 
