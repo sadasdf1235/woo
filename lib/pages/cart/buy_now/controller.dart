@@ -8,6 +8,9 @@ class BuyNowController extends GetxController {
   // 商品详情
   final ProductModel product;
 
+  // 送货地址
+  String shippingAddress = "";
+
   // 支付方式图标
   List<String> paymentList = [
     AssetsImages.pVisaPng,
@@ -16,7 +19,10 @@ class BuyNowController extends GetxController {
     AssetsImages.pPaypalPng,
   ];
 
+  // 初始
   _initData() {
+    shippingAddress = UserService.to.shipping;
+
     update(["buy_now"]);
   }
 
@@ -34,6 +40,16 @@ class BuyNowController extends GetxController {
   void onReady() {
     super.onReady();
     _initData();
+  }
+
+  // goto 送货地址修改
+  Future<void> onShippingTap() async {
+    var result = await Get.toNamed(RouteNames.myAddress,
+        arguments: {"type": "Shipping"});
+    if (result != null && result == true) {
+      shippingAddress = UserService.to.shipping;
+      update(["buy_now"]);
+    }
   }
 
   // @override
