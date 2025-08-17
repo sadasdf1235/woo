@@ -97,15 +97,23 @@ class ConfigService extends GetxService {
     Storage().setBool(Constants.storageAlreadyOpen, true);
   }
 
-  // 添加 onLocaleUpdate 方法
+  // 更新语言设置方法
   void onLocaleUpdate(String? locale) {
     if (locale != null) {
       var l = locale.split("-");
+      Locale newLocale;
       if (l.length >= 2) {
-        Get.updateLocale(Locale(l[0], l[1]));
+        newLocale = Locale(l[0], l[1]);
       } else {
-        Get.updateLocale(Locale(l[0]));
+        newLocale = Locale(l[0]);
       }
+      
+      // 更新当前语言设置
+      this.locale = newLocale;
+      Get.updateLocale(newLocale);
+      
+      // 保存到本地存储
+      Storage().setString(Constants.storageLanguageCode, newLocale.languageCode);
     }
   }
 

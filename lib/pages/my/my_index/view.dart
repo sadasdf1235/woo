@@ -178,7 +178,7 @@ class MyIndexPage extends GetView<MyIndexController> {
       _buildListItem(
         txtTitle: LocaleKeys.myBtnLanguage.tr,
         svgPath: AssetsSvgs.pTranslateSvg,
-        onTap: () => Get.toNamed(RouteNames.myLanguage),
+        onTap: () => controller.onLanguageSelected(),
       ),
 
       // 样式页
@@ -192,14 +192,7 @@ class MyIndexPage extends GetView<MyIndexController> {
       _buildListItem(
         txtTitle: LocaleKeys.myBtnTheme.tr,
         svgPath: AssetsSvgs.pThemeSvg,
-        onTap: () => ConfigService.to.switchThemeMode(),
-      ),
-
-      // 调试工具
-      _buildListItem(
-        txtTitle: LocaleKeys.myBtnStyles.tr,
-        svgPath: AssetsSvgs.pCurrencySvg,
-        onTap: () => Get.toNamed(RouteNames.stylesIndex),
+        onTap: () => controller.onThemeSelected(),
       ),
     ].toColumn().card().paddingVertical(AppSpace.page);
   }

@@ -46,6 +46,10 @@ class RoutePages {
       page: () => const LanguagePage(),
     ),
     GetPage(
+      name: RouteNames.myAddress,
+      page: () => const MyAddressPage(),
+    ),
+    GetPage(
       name: RouteNames.myMyIndex,
       page: () => const MyIndexPage(),
     ),
