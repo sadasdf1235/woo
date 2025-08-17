@@ -1,6 +1,7 @@
 static const cartApplyPromoCode = '/cart_apply_promo_code';
 static const cartBuyDone = '/cart_buy_done';
 static const cartBuyNow = '/cart_buy_now';
+static const cartBuyNowWidget = '/cart_buy_now_widget';
 static const cartCartIndex = '/cart_cart_index';
 static const cartCartIndexWidget = '/cart_cart_index_widget';
 static const goodsCategory = '/goods_category';

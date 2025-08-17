@@ -46,4 +46,5 @@ class RouteNames {
   static const cartBuyDone = '/cart_buy_done';
   static const cartBuyNow = '/cart_buy_now';
   static const cartCartIndex = '/cart_cart_index';
+  static const cartBuyNowWidget = '/cart_buy_now';
 }

@@ -4,6 +4,7 @@ export 'cart/apply_promo_code/index.dart';
 export 'cart/buy_done/index.dart';
 export 'cart/buy_now/index.dart';
 export 'cart/cart_index/index.dart';
+export 'cart/buy_now/widget/index.dart';
 
 export 'goods/category/index.dart';
 export 'goods/home/index.dart';

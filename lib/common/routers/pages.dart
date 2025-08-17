@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../pages/index.dart';
+import '/pages/index.dart';
 import 'index.dart';
 
 class RoutePages {
@@ -10,16 +10,8 @@ class RoutePages {
 
   static List<GetPage> list = [
     GetPage(
-      name: RouteNames.cartApplyPromoCode,
-      page: () => const ApplyPromoCodePage(),
-    ),
-    GetPage(
       name: RouteNames.cartBuyDone,
       page: () => const BuyDonePage(),
-    ),
-    GetPage(
-      name: RouteNames.cartBuyNow,
-      page: () => const BuyNowPage(),
     ),
     GetPage(
       name: RouteNames.cartCartIndex,

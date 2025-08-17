@@ -12,6 +12,10 @@
         page: () => const BuyNowPage(),
       ),
       GetPage(
+        name: RouteNames.cartBuyNowWidget,
+        page: () => const WidgetPage(),
+      ),
+      GetPage(
         name: RouteNames.cartCartIndex,
         page: () => const CartIndexPage(),
       ),
