@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ducafe_ui_core/ducafe_ui_core.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
+import 'package:validatorless/validatorless.dart';
 
 import 'index.dart';
 import '/common/index.dart';
@@ -46,12 +47,115 @@ class ProfileEditPage extends GetView<ProfileEditController> {
 
   //  profile 表单
   Widget _buildProfileForm(BuildContext context) {
-    return const Text("profile 表单");
+    return <Widget>[
+      // first name
+      InputFormFieldWidget(
+        controller: controller.firstNameController,
+        labelText: LocaleKeys.profileEditFirstName.tr,
+        validator: Validatorless.multiple([
+          Validatorless.required("The field is obligatory"),
+          Validatorless.min(
+              3, "Length cannot be less than @size".trParams({"size": "3"})),
+          Validatorless.max(18,
+              "Length cannot be greater than @size".trParams({"size": "18"})),
+        ]),
+      ),
+
+      // last name
+      InputFormFieldWidget(
+        controller: controller.lastNameController,
+        labelText: LocaleKeys.profileEditLastName.tr,
+        validator: Validatorless.multiple([
+          Validatorless.required("The field is obligatory"),
+          Validatorless.min(
+              3, "Length cannot be less than @size".trParams({"size": "3"})),
+          Validatorless.max(18,
+              "Length cannot be greater than @size".trParams({"size": "18"})),
+        ]),
+      ),
+
+      // Email
+      InputFormFieldWidget(
+        keyboardType: TextInputType.emailAddress,
+        controller: controller.emailController,
+        labelText: LocaleKeys.profileEditEmail.tr,
+        validator: Validatorless.multiple([
+          Validatorless.required("The field is obligatory"),
+          Validatorless.email(LocaleKeys.validatorEmail.tr),
+        ]),
+      ),
+      // end
+    ]
+        .toColumn()
+        .paddingAll(AppSpace.card)
+        .card(
+          color: context.colors.scheme.surface,
+          margin: EdgeInsets.zero,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.zero,
+          ),
+          elevation: 0.1,
+        )
+        .paddingBottom(AppSpace.card);
   }
 
   //  password 表单
   Widget _buildPasswordForm(BuildContext context) {
-    return const Text("password 表单");
+    return <Widget>[
+      // old password
+      InputFormFieldWidget(
+        obscureText: true,
+        keyboardType: TextInputType.visiblePassword,
+        controller: controller.oldPasswordController,
+        labelText: LocaleKeys.profileEditOldPassword.tr,
+        tipText: LocaleKeys.profileEditPasswordTip.tr,
+        validator: Validatorless.multiple([
+          Validatorless.min(
+              3, "Length cannot be less than @size".trParams({"size": "3"})),
+          Validatorless.max(18,
+              "Length cannot be greater than @size".trParams({"size": "18"})),
+        ]),
+      ),
+
+      // new password
+      InputFormFieldWidget(
+        obscureText: true,
+        keyboardType: TextInputType.visiblePassword,
+        controller: controller.newPasswordController,
+        labelText: LocaleKeys.profileEditNewPassword.tr,
+        tipText: LocaleKeys.profileEditPasswordTip.tr,
+        validator: Validatorless.multiple([
+          Validatorless.min(
+              3, "Length cannot be less than @size".trParams({"size": "3"})),
+          Validatorless.max(18,
+              "Length cannot be greater than @size".trParams({"size": "18"})),
+        ]),
+      ),
+
+      // confirm password
+      InputFormFieldWidget(
+        obscureText: true,
+        keyboardType: TextInputType.visiblePassword,
+        controller: controller.confirmNewPasswordController,
+        labelText: LocaleKeys.profileEditConfirmPassword.tr,
+        tipText: LocaleKeys.profileEditPasswordTip.tr,
+        validator: Validatorless.multiple([
+          Validatorless.min(
+              3, "Length cannot be less than @size".trParams({"size": "3"})),
+          Validatorless.max(18,
+              "Length cannot be greater than @size".trParams({"size": "18"})),
+        ]),
+      ),
+
+      // end
+    ].toColumn().paddingAll(AppSpace.card).card(
+          color: context.colors.scheme.surface,
+          margin: EdgeInsets.zero,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.zero,
+          ),
+          elevation: 0.1,
+        );
   }
 
   // 主视图
@@ -76,8 +180,9 @@ class ProfileEditPage extends GetView<ProfileEditController> {
         // 保存按钮
         ButtonWidget.primary(
           LocaleKeys.commonBottomSave.tr,
+          onTap: controller.onSave,
         ).width(double.infinity),
-      ].toColumn().paddingAll(AppSpace.card),
+      ].toColumn().paddingVertical(AppSpace.card),
     );
   }
 
