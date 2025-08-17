@@ -20,9 +20,19 @@ class Privilege {
       var statuses = await [Permission.photos].request();
       value = statuses[Permission.photos] == PermissionStatus.granted;
     }
+
+    // 在 Android 中， Permission.storage 权限与 Android READ_EXTERNAL_STORAGE 和 WRITE_EXTERNAL_STORAGE 权限相关联。
+    // 从 Android 10（API 29）开始， READ_EXTERNAL_STORAGE 和 WRITE_EXTERNAL_STORAGE 权限已被标记为已弃用，
+    // 并且自 Android 13（API 33）起已完全移除/禁用。
     if (GetPlatform.isAndroid) {
-      var statuses = await [Permission.storage].request();
-      value = statuses[Permission.storage] == PermissionStatus.granted;
+      var permissions = <Permission>[];
+      permissions.addAll([Permission.photos]);
+      var statuses = await permissions.request();
+      value = statuses[Permission.photos] == PermissionStatus.granted;
+      // permissions.addAll([Permission.photos, Permission.storage]);
+      // var statuses = await permissions.request();
+      // value = statuses[Permission.storage] == PermissionStatus.granted &&
+      //     statuses[Permission.photos] == PermissionStatus.granted;
     }
     return PrivilegeStatus(
       result: value,
@@ -34,22 +44,12 @@ class Privilege {
   static Future<PrivilegeStatus> camera() async {
     var value = false;
     var permissions = <Permission>[];
-    permissions.addAll([Permission.camera, Permission.microphone]);
-    if (GetPlatform.isIOS) {
-      permissions.add(Permission.photos);
-    }
-    if (GetPlatform.isAndroid) {
-      permissions.add(Permission.storage);
-    }
+    permissions
+        .addAll([Permission.photos, Permission.camera, Permission.microphone]);
     var statuses = await permissions.request();
-    value = statuses[Permission.camera] == PermissionStatus.granted &&
+    value = statuses[Permission.photos] == PermissionStatus.granted &&
+        statuses[Permission.camera] == PermissionStatus.granted &&
         statuses[Permission.microphone] == PermissionStatus.granted;
-    if (GetPlatform.isIOS) {
-      value = statuses[Permission.photos] == PermissionStatus.granted;
-    }
-    if (GetPlatform.isAndroid) {
-      value = statuses[Permission.storage] == PermissionStatus.granted;
-    }
     return PrivilegeStatus(
       result: value,
       message: value ? 'ok' : 'Please turn on camera and microphone access',

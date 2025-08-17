@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 import '/common/index.dart';
 
@@ -18,6 +19,9 @@ class ProfileEditController extends GetxController {
   TextEditingController newPasswordController = TextEditingController();
   TextEditingController confirmNewPasswordController = TextEditingController();
 
+  // 头像图片
+  AssetEntity? userPhoto;
+
   // 初始数据_
   _initData() {
     // 用户 profile
@@ -28,6 +32,31 @@ class ProfileEditController extends GetxController {
     lastNameController.text = profile.lastName ?? "";
     emailController.text = profile.email ?? "";
     update(["profile_edit"]);
+  }
+
+  // 选取照片
+  void onSelectPhoto() {
+    BottomSheetWidget.show(
+      context: Get.context!,
+      titleString: "Select photo",
+      padding: 20,
+      content: PickerImageWidget(
+        // 拍照
+        onTapTake: (AssetEntity? result) async {
+          if (result != null) {
+            userPhoto = result;
+            update(["profile_edit"]);
+          }
+        },
+        // 相册
+        onTapAlbum: (List<AssetEntity>? result) async {
+          if (result != null && result.isNotEmpty) {
+            userPhoto = result.first;
+            update(["profile_edit"]);
+          }
+        },
+      ),
+    );
   }
 
   void onTap() {}
